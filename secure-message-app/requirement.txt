@@ -1,0 +1,19 @@
+Problem statement:
+
+Design a highly scalable system to secure saas apps like slack, gdrive, dropbox etc.
+   i.  App should poll each message from saas apps and check if message is violating policies.
+  ii.  If violation is detected, show this in the dashboard  in realtime.
+ iii.  Multiple organizations can both use 10 different apps like slack, gdrive, Gmail etc.
+  iv.  Dashboard would be different for organizations
+   v.  Message process time by this system is 1 min
+
+High Level Design
+========================================================================
+
+Functional Components
+ - message monitoring system
+ - admin UI to configure organization policy
+ - controller system to perform action (delete, flag and alert) based on message violations
+ - audit and logging
+ - dashboard UI to show messages violating stats and action
+
