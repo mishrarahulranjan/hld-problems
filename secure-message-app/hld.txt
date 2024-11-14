@@ -1,0 +1,46 @@
+High Level Design
+===================================================================================================================
+
+Key features
+ - message monitoring (scanning and analysis)
+ - admin portal to configure organization policy (policy engine) : crud operations on custom policy and prohibited words etc
+ - controller to perform action (delete, flag and alert) based on message violations
+ - audit and logging
+ - dashboard to show messages violating stats and action
+
+Components
+
+Backend and Frontend Components
+
+ i. integration service with slack/gdrive/teams
+     - retrieve messages, post responses, or take actions like deleting messages based on violations.
+     - use webhooks (from Slack or Teams) to receive real-time notifications of new messages
+     or a polling mechanism to periodically check for new messages.
+     - use oAuth to communicate with api.
+ ii. User Interface
+     - admin portal to configure policy
+     - dashboard to view violations and take actions
+     - admin page to configure alerting mechanism
+     - access control on admin activity.
+ iii. Policy Manager Module
+     - policy definition
+     - load policy and apply polices
+     - policy actions (flag message, notify, log violation)
+ iv. Message processor service (interceptor)
+     - extract relevant metadata like sender, timestamp, and message content.
+     - use Natural Language Processing (NLP) to analyze the content for policy violations
+     - integration with external threat intelligence services
+ v. Notification service
+    - sends alerts via email, slacks or teams on violations.
+    - actionable notifications to resolve violations.
+ vi. logging and audit service
+    - for audit trails on policy admin operations and action taken
+    - retention of audit trails and other info
+
+Storage
+  - use noSql db (mongo db) for storing policy , violations logs and audit logs in
+  - house-keeping job to clear the data based on retention for logs and audit trails
+
+Centralised logging
+  - use splunk to logs all violations and audit trails for this service.
+  - use splunk alerting based on logs
